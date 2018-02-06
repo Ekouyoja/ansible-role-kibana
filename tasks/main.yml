@@ -1,0 +1,14 @@
+---
+- name: "Copie du dépôt Kibana"
+  copy:
+    src: defaults/kibana.repo
+    dest: /etc/yum.repos.d/kibana6.repo
+    
+- name: "Installation de Kibana et dépendance JDK"
+  yum: name="{{item}}" state=latest
+  with_items:
+    - "{{ java_package }}"
+    - "kibana"
+  
+- name: "Enable and start kibana service"
+  systemd: name=kibana enabled=yes state=started

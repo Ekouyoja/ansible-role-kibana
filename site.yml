@@ -1,0 +1,7 @@
+---
+- name: Install du role kibana
+  hosts: all
+  become: true
+  remote_user: root
+  roles: 
+     - { role: kibana, tags: [ 'kibana' ] }
